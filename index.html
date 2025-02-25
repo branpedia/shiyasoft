@@ -4,7 +4,328 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Shiya Soft</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Link ke file CSS -->
+  <style>
+    /* Reset beberapa style default */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f9f9f9;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* ========== HEADER ========== */
+    header {
+      background: linear-gradient(135deg, #007FFF, #00D1FF);
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      /* Animasi fadeInDown untuk judul */
+      animation: fadeInDown 1s ease-out forwards;
+    }
+
+    header p {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      animation: fadeInDown 1s ease-out forwards;
+      animation-delay: 0.2s;
+    }
+
+    header button {
+      background: white;
+      color: #007FFF;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 1rem;
+      animation: fadeInDown 1s ease-out forwards;
+      animation-delay: 0.4s;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    header button:hover {
+      background: #e0e0e0;
+      transform: scale(1.05);
+    }
+
+    /* ========== SECTION UMUM ========== */
+    section {
+      padding: 40px 0;
+    }
+
+    section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* ====== Gaya List dengan Centang Hijau ====== */
+    .checklist {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 20px;
+    }
+
+    .checklist li {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 10px;
+    }
+
+    .checklist li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: #00AA00;
+      font-weight: bold;
+    }
+    /* ============================================ */
+
+    /* ========== ANIMASI ========== */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Scroll reveal: awal tersembunyi */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== PRICING TABLE ========== */
+    .pricing-table {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .pricing-card {
+      background: #007FFF;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 10px;
+      width: calc(100% - 20px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      animation: fadeInUp 1s forwards;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .pricing-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .pricing-card ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .pricing-card li {
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    /* Tombol asli (jika diperlukan) */
+    .pricing-card button {
+      background: white;
+      color: #007FFF;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 20px;
+    }
+
+    /* Gaya untuk tombol sebagai link WhatsApp */
+    .pricing-btn {
+      background: white;
+      color: #007FFF;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 20px;
+      text-decoration: none;
+      display: inline-block;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .pricing-btn:hover {
+      background: #e0e0e0;
+    }
+
+    /* ========== TESTIMONIALS ========== */
+    h2.testimonial-title {
+      margin-bottom: 5px;
+    }
+    .testimonial-intro {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    /* Kontainer Slider */
+    .testimonial-slider {
+      position: relative;
+      overflow: hidden;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Track untuk kartu testimoni */
+    .testimonial-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .testimonial-card {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 20px;
+      width: 100%;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      text-align: left;
+      margin: 0 10px;
+      flex-shrink: 0;
+      animation: fadeInUp 1s forwards;
+    }
+
+    .testimonial-card h3 {
+      font-size: 1.1rem;
+      color: #007FFF;
+      margin-bottom: 10px;
+    }
+
+    .testimonial-card p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .testimonial-card em {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    /* Tombol navigasi slider */
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #007FFF;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .slider-btn:hover {
+      opacity: 1;
+    }
+
+    .prev-btn {
+      left: 10px;
+    }
+
+    .next-btn {
+      right: 10px;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 40px;
+    }
+
+    /* ========== RESPONSIVE MEDIA QUERIES ========== */
+    @media (min-width: 768px) {
+      .container {
+        padding: 40px;
+      }
+
+      header h1 {
+        font-size: 3rem;
+      }
+
+      header p {
+        font-size: 1.5rem;
+      }
+
+      .pricing-card {
+        width: calc(33.333% - 20px);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .container {
+        padding: 50px;
+      }
+
+      header h1 {
+        font-size: 4rem;
+      }
+
+      header p {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- HEADER -->
@@ -12,7 +333,7 @@
     <div class="container">
       <h1>Shiya Soft</h1>
       <p>Mudahkan segalanya dengan Shiya Soft</p>
-      <button id="startBtn">Mulai Sekarang</button>
+      <button>Mulai Sekarang</button>
     </div>
   </header>
   
@@ -21,8 +342,8 @@
     <div class="container reveal">
       <h2>Tentang Kami</h2>
       <p>
-        Kami menyediakan banyak fitur yang bisa Anda gunakan. 
-        Anda dapat menjelajahi fitur-fitur yang kami sediakan dengan menyenangkan 
+        Kami Menyediakan Banyak Fitur yang Bisa Anda Gunakan.
+        Anda dapat menjelajahi fitur-fitur yang kami sediakan dengan menyenangkan
         dan masing-masing memiliki fungsinya sendiri.
       </p>
       <ul class="checklist">
@@ -33,12 +354,14 @@
       </ul>
     </div>
   </section>
-
+  
   <!-- PRICING SECTION -->
   <section id="pricing">
     <div class="container reveal">
       <h2>Pilih Paket Anda</h2>
+      <p>Mari pilih paket yang terbaik untuk Anda dan jelajahi dengan senang hati.</p>
       <div class="pricing-table">
+        <!-- Paket Gratis -->
         <div class="pricing-card">
           <h3>Paket Gratis</h3>
           <p>Menggunakan Limit Harian</p>
@@ -47,26 +370,152 @@
             <li>Fitur Gratis Terbatas</li>
             <li>Bekerja di Semua Perangkat</li>
           </ul>
-          <a class="pricing-btn" href="https://wa.me/6285835297487?text=.menu">Gratis</a>
+          <a class="pricing-btn" href="https://wa.me/6285835297487?text=.menu" target="_blank">Gratis</a>
         </div>
+        <!-- Paket Premium -->
         <div class="pricing-card">
           <h3>Paket Premium</h3>
           <p>Unlimited Limit</p>
           <ul>
             <li>Unlimited Pesan</li>
             <li>Tambahan Fitur Premium</li>
+            <li>Bekerja di Semua Perangkat</li>
+            <li>Dukungan Prioritas</li>
           </ul>
-          <a class="pricing-btn" href="https://wa.me/6285835297487?text=.premium">Rp 100.000/Bulan</a>
+          <a class="pricing-btn" href="https://wa.me/6285835297487?text=.premium" target="_blank">Rp 100.000/Bulan</a>
+        </div>
+        <!-- Paket VVIP (Grup) -->
+        <div class="pricing-card">
+          <h3>Paket VVIP (Grup)</h3>
+          <p>Unlimited Limit</p>
+          <ul>
+            <li>Unlimited Pesan</li>
+            <li>Tambahan Fitur VVIP</li>
+            <li>Bekerja di Semua Perangkat</li>
+            <li>Dukungan Prioritas</li>
+          </ul>
+          <a class="pricing-btn" href="https://wa.me/6285835297487?text=.Sewabot" target="_blank">Rp 150.000/Bulan</a>
         </div>
       </div>
     </div>
   </section>
+  
+  <!-- TESTIMONIALS SECTION -->
+  <section id="testimonials">
+    <div class="container reveal">
+      <h2 class="testimonial-title">Dipercaya oleh Ribuan Pelanggan Bahagia</h2>
+      <p class="testimonial-intro">
+        Ini adalah cerita dari pelanggan kami yang telah bergabung dengan kami dengan senang hati
+        saat menggunakan fitur luar biasa ini.
+      </p>
 
-  <!-- FOOTER -->
-  <footer>
-    <p>&copy; 2025 Shiya Soft. All rights reserved.</p>
-  </footer>
+      <!-- Slider Container -->
+      <div class="testimonial-slider">
+        <!-- Tombol geser kiri -->
+        <button class="slider-btn prev-btn">&lt;</button>
 
-  <script src="script.js"></script> <!-- Link ke file JavaScript -->
+        <!-- Track (jalur geser) -->
+        <div class="testimonial-track">
+          <!-- Testimonial Slide 1 -->
+          <div class="testimonial-card">
+            <h3>Maudia Ayo</h3>
+            <p>"Shiya Soft sangat membantu saya dalam mengelola bisnis. Botnya mudah digunakan dan responsif."</p>
+            <p><em>– Pengusaha Online</em></p>
+          </div>
+
+          <!-- Testimonial Slide 2 -->
+          <div class="testimonial-card">
+            <h3>Rudi Irawan</h3>
+            <p>"Shiya Soft adalah bot serbaguna terbaik yang pernah saya coba. Banyak fitur canggih dan mudah diintegrasikan."</p>
+            <p><em>– Digital Marketer</em></p>
+          </div>
+
+          <!-- Testimonial Slide 3 -->
+          <div class="testimonial-card">
+            <h3>Fadhil</h3>
+            <p>"Sangat puas dengan layanan Shiya Soft. Fitur-fiturnya sangat lengkap, recommended banget!"</p>
+            <p><em>– Content Creator</em></p>
+          </div>
+        </div>
+
+        <!-- Tombol geser kanan -->
+        <button class="slider-btn next-btn">&gt;</button>
+      </div>
+    </div>
+  </section>
+  
+  <!-- (OPSIONAL) CTA SECTION SETELAH TESTIMONI -->
+  <section style="background: #f4f4f4; text-align: center; padding: 40px;">
+    <div class="container reveal">
+      <h2>Berlangganan Sekarang dan Dapatkan Fitur Spesial!</h2>
+      <p>Ayo berlangganan bersama kami dan temukan kesenangan.</p>
+      <button style="background: #007FFF; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; transition: transform 0.3s;"
+              onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        Mulai Sekarang
+      </button>
+    </div>
+  </section>
+  
+  <script>
+    // Smooth scrolling ke section yang dituju
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Event listener untuk tombol "Mulai Sekarang" di Header
+    document.querySelector('header button').addEventListener('click', function() {
+      window.location.href = '#pricing';
+    });
+
+    // ========== LOGIC SLIDER TESTIMONI ==========
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const track = document.querySelector('.testimonial-track');
+    const slides = Array.from(document.querySelectorAll('.testimonial-card'));
+    let currentSlide = 0;
+
+    function updateSlide() {
+      track.style.transform = `translateX(-${currentSlide * (100 + 2)}%)`;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      currentSlide++;
+      if (currentSlide >= slides.length) {
+        currentSlide = 0;
+      }
+      updateSlide();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      currentSlide--;
+      if (currentSlide < 0) {
+        currentSlide = slides.length - 1;
+      }
+      updateSlide();
+    });
+
+    // ========== SCROLL REVEAL ==========
+    function reveal() {
+      const reveals = document.querySelectorAll('.reveal');
+      for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        const elementVisible = 150;
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add('active');
+        } else {
+          reveals[i].classList.remove('active');
+        }
+      }
+    }
+    window.addEventListener('scroll', reveal);
+    // Panggil fungsi reveal pada load
+    reveal();
+  </script>
 </body>
-</html>
+  </html>
